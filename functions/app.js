@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 const port = process.env.PORT || 3000;
-const secretKey = process.env.SECRET;
+const secretKey = process.env.SECRET || "notsosecret";
 
 app.use(bodyParser.json());
 
