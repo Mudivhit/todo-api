@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const serverless = require('serverless-http');
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
@@ -172,8 +173,5 @@ app.delete("/tasks/:id", verifyToken, (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-module.exports = app;
+app.use('/.netlify/functions/app', router);
+module.exports.handler = serverless(app);
